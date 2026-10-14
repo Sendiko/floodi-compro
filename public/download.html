@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3f8f8" />
+  <meta name="description" content="Download the Floodi mobile app from GitHub releases or directly as an Android APK." />
+  <title>Download Floodi | Floodi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #14323c;
+      --muted: #536b70;
+      --line: #d7e3e2;
+      --paper: #f3f8f8;
+      --white: #ffffff;
+      --teal: #087b72;
+      --teal-dark: #075a55;
+      --lime: #d7f277;
+      --coral: #f27a5e;
+      --display: "Space Grotesk", sans-serif;
+      --body: "Inter", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image: linear-gradient(rgba(20, 50, 60, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 50, 60, .035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 82px;
+      padding: 16px clamp(20px, 6vw, 88px);
+      border-bottom: 1px solid rgba(20, 50, 60, .1);
+      background: rgba(255, 255, 255, .8);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+
+    .brand img { width: 42px; height: 42px; object-fit: contain; }
+    .brand-name { font: 700 20px/1 var(--display); }
+    .brand-by { margin-top: 5px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--teal); }
+    .material-symbols-outlined { font-size: 19px; line-height: 1; }
+
+    main {
+      width: min(100% - 40px, 1050px);
+      margin: 0 auto;
+      padding: clamp(58px, 9vw, 108px) 0 82px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 176px;
+      align-items: end;
+      gap: 32px;
+      margin-bottom: 46px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      color: var(--teal-dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before { width: 22px; height: 3px; background: var(--coral); content: ""; }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font: 700 clamp(40px, 6vw, 66px)/1.02 var(--display);
+    }
+
+    .intro-copy {
+      max-width: 570px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .app-mark {
+      display: grid;
+      width: 152px;
+      aspect-ratio: 1;
+      place-items: center;
+      justify-self: end;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .75);
+      border-radius: 34px;
+      background: var(--white);
+      box-shadow: 0 18px 48px rgba(20, 50, 60, .12);
+      transform: rotate(4deg);
+    }
+
+    .app-mark img { width: 100%; height: 100%; object-fit: cover; }
+
+    .download-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .option {
+      display: flex;
+      min-height: 260px;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 27px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .option.direct { border-top: 4px solid var(--teal); padding-top: 24px; }
+
+    .option-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 12px;
+      background: #e6f3ef;
+      color: var(--teal-dark);
+    }
+
+    .option.github .option-icon { background: #edf0f2; color: #26343b; }
+
+    .option h2 { margin: 20px 0 8px; font: 600 21px/1.2 var(--display); }
+    .option p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+    .option-bottom {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 25px;
+    }
+
+    .platform { color: var(--muted); font-size: 11px; font-weight: 600; }
+
+    .button {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--teal);
+      color: var(--white);
+      font: 600 13px/1 var(--body);
+      text-decoration: none;
+      transition: background-color .18s ease, transform .18s ease;
+    }
+
+    .button:hover { background: var(--teal-dark); transform: translateY(-1px); }
+    .github .button { background: #1b3038; }
+    .github .button:hover { background: #304850; }
+    .button[aria-disabled="true"] { background: #a8b7b7; cursor: not-allowed; pointer-events: none; }
+
+    .download-status {
+      min-height: 18px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .release-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 22px;
+      padding: 15px 17px;
+      border-left: 3px solid var(--lime);
+      background: rgba(255, 255, 255, .58);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .release-note .material-symbols-outlined { flex: none; color: var(--teal-dark); }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    footer a { color: var(--teal-dark); font-weight: 600; text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .topbar { min-height: 70px; padding-inline: 18px; }
+      .brand img { width: 36px; height: 36px; }
+      main { width: min(100% - 36px, 480px); padding-top: 55px; }
+      .intro { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: 32px; }
+      .app-mark { width: 82px; border-radius: 20px; justify-self: start; grid-row: 1; }
+      .download-options { grid-template-columns: minmax(0, 1fr); }
+      .option { min-height: 245px; padding: 23px; }
+      .option.direct { padding-top: 20px; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Floodi home">
+      <img src="floodi_logo.png" alt="" />
+      <span>
+        <span class="brand-name">Floodi</span>
+        <span class="brand-by">by SAS Innovation</span>
+      </span>
+    </a>
+    <a class="back-link" href="index.html"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>Back to Floodi</a>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <div class="eyebrow">Floodi Mobile</div>
+        <h1 id="page-title">Stay ahead of rising water.</h1>
+        <p class="intro-copy">Choose how you’d like to get the Floodi app. Browse every release on GitHub, or download the latest Android package directly.</p>
+      </div>
+      <div class="app-mark" aria-hidden="true"><img src="floodi_logo.png" alt="" /></div>
+    </section>
+
+    <section class="download-options" aria-label="Download options">
+      <article class="option github">
+        <div class="option-icon"><span class="material-symbols-outlined" aria-hidden="true">code</span></div>
+        <h2>GitHub releases</h2>
+        <p>Browse release notes and choose an available build from the project’s GitHub releases.</p>
+        <div class="option-bottom">
+          <span class="platform">All published builds</span>
+          <a class="button" href="https://github.com/Sendiko-Software-Studio/floodi-android/releases/" target="_blank" rel="noopener noreferrer">
+            View releases <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="option direct">
+        <div class="option-icon"><span class="material-symbols-outlined" aria-hidden="true">download</span></div>
+        <h2>Direct APK download</h2>
+        <p>Get the newest Android installer without opening the release page.</p>
+        <div class="option-bottom">
+          <span class="platform">Android · .apk</span>
+          <a class="button" id="direct-download" aria-disabled="true" tabindex="-1">
+            <span class="button-label">Checking...</span>
+            <span class="material-symbols-outlined" aria-hidden="true">download</span>
+          </a>
+        </div>
+        <p class="download-status" id="download-status" role="status" aria-live="polite">Checking GitHub for the latest APK...</p>
+      </article>
+    </section>
+
+    <aside class="release-note">
+      <span class="material-symbols-outlined" aria-hidden="true">info</span>
+      <span>Android APKs are available when attached to a published GitHub release. If no APK is published yet, check back later or browse the release page.</span>
+    </aside>
+
+    <footer>
+      <span>Floodi · Water monitoring by SAS Innovation</span>
+      <a href="index.html#contact">Contact SAS Innovation</a>
+    </footer>
+  </main>
+
+  <script>
+    const releasesApi = "https://api.github.com/repos/Sendiko/floodi-compro/releases?per_page=20";
+    const downloadLink = document.querySelector("#direct-download");
+    const downloadLabel = document.querySelector(".button-label");
+    const downloadStatus = document.querySelector("#download-status");
+
+    function formatFileSize(bytes) {
+      if (!bytes) return "APK";
+      const megabytes = bytes / (1024 * 1024);
+      return `${megabytes.toFixed(1)} MB`;
+    }
+
+    async function showLatestApk() {
+      try {
+        const response = await fetch(releasesApi, {
+          headers: { Accept: "application/vnd.github+json" }
+        });
+
+        if (!response.ok) throw new Error("GitHub releases could not be loaded");
+
+        const releases = await response.json();
+        const releaseWithApk = releases.find((release) =>
+          !release.draft && release.assets?.some((asset) => /\.apk$/i.test(asset.name))
+        );
+
+        if (!releaseWithApk) {
+          downloadLabel.textContent = "Not available yet";
+          downloadStatus.textContent = releases.length
+            ? "No APK is attached to a published release yet."
+            : "No releases have been published yet.";
+          return;
+        }
+
+        const apk = releaseWithApk.assets.find((asset) => /\.apk$/i.test(asset.name));
+        downloadLink.href = apk.browser_download_url;
+        downloadLink.removeAttribute("aria-disabled");
+        downloadLink.removeAttribute("tabindex");
+        downloadLabel.textContent = "Download APK";
+        downloadStatus.textContent = `${apk.name} · ${formatFileSize(apk.size)} · ${releaseWithApk.tag_name}`;
+      } catch {
+        downloadLabel.textContent = "Unavailable";
+        downloadStatus.textContent = "Couldn’t check for an APK. Browse GitHub releases to see available builds.";
+      }
+    }
+
+    showLatestApk();
+  </script>
+</body>
+
+</html>
