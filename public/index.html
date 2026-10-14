@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="web_standard" name="shell-type" />
+  <title>Floodi - Real-time Water Monitoring &amp; Flood Mitigation</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    @layer base {
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        overscroll-behavior: none;
+      }
+
+      main>:first-child {
+        margin-top: 0 !important;
+      }
+
+      main>:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "inverse-surface": "#2c3134", "surface-bright": "#f6fafe", "on-error": "#ffffff", "background": "#f6fafe", "tertiary-fixed-dim": "#7ed0ff", "surface-container-lowest": "#ffffff", "on-tertiary-container": "#acdfff", "surface-container-high": "#e4e9ed", "on-tertiary-fixed": "#001e2d", "surface": "#f6fafe", "on-secondary-fixed-variant": "#334188", "secondary-fixed": "#dee0ff", "outline-variant": "#c0c7ce", "secondary-fixed-dim": "#bac3ff", "on-tertiary": "#ffffff", "surface-container": "#eaeef2", "on-secondary-fixed": "#00105b", "on-primary-fixed": "#001e2e", "inverse-on-surface": "#edf1f5", "on-tertiary-fixed-variant": "#004c6a", "on-error-container": "#93000a", "on-surface-variant": "#41484e", "surface-variant": "#dfe3e7", "outline": "#71787e", "error": "#ba1a1a", "on-surface": "#171c1f", "error-container": "#ffdad6", "tertiary": "#004c69", "primary": "#004c6d", "secondary": "#4c59a2", "primary-fixed": "#c8e6ff", "on-primary": "#ffffff", "surface-container-highest": "#dfe3e7", "on-primary-container": "#b2deff", "surface-container-low": "#f0f4f8", "tertiary-fixed": "#c5e7ff", "surface-dim": "#d6dade", "primary-container": "#246488", "on-primary-fixed-variant": "#004c6d", "inverse-primary": "#94cdf6", "on-background": "#171c1f", "primary-fixed-dim": "#94cdf6", "on-secondary-container": "#323f87", "surface-tint": "#246488", "tertiary-container": "#00658b", "secondary-container": "#a1aefe", "on-secondary": "#ffffff" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }, spacing: { "gutter-mobile": "0.75rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "margin-mobile": "1rem", margin: "2rem", gutter: "1.5rem", "space-xl": "2.5rem", "space-sm": "0.5rem", "space-md": "1rem" }, fontFamily: { "headline-sm": ["Space Grotesk"], "label-md": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-md": ["Inter"], "headline-lg-mobile": ["Space Grotesk"], "body-sm": ["Inter"], "label-sm": ["Space Grotesk"], "label-lg": ["Space Grotesk"], "display-lg": ["Space Grotesk"], "display-lg-mobile": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "title-lg": ["Inter"], "title-md": ["Inter"], "body-lg": ["Inter"] }, fontSize: { "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "600" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "0", fontWeight: "600" }], "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }], "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.06em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.02em", fontWeight: "600" }], "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }], "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }], "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }], "title-lg": ["18px", { lineHeight: "26px", fontWeight: "600" }], "title-md": ["16px", { lineHeight: "24px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }] } } } }</script>
+</head>
+
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased">
+  <header
+    class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-sm"><img alt="Floodi Logo" class="h-8 w-auto object-contain"
+          src="https://lh3.googleusercontent.com/aida/AEtjO1UYg_fvkYp3nUjfxk7G1Pnhk3qpoH43n1zEk_IgUwaG0ysZ6kD0L3-maC9U73RHKTX8JfyaSkbd2aaTwUFp8Ef4oVU5CIufO-mKNPr9uXO1Wt2BuzjoulVaJeTgf4YQPXxMSVyAalUWP0VsQLoYsZDKClCiFdf3xLT-oqfPQ7gCMcioyDdlj0m_9uxn-bUMBc74MBPVy4NLT9meDT4zRn9jMWYO-0czrI_STwI4sPg0phTDTS92YBLIVPYq" />
+        <div class="flex flex-col"><span
+            class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Floodi</span><span
+            class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">by SAS
+            Innovation</span></div>
+      </div>
+      <nav class="hidden lg:flex items-center gap-8" data-active-classes="text-primary font-label-lg font-bold"><a
+          aria-current="page" class="transition-colors text-primary font-label-lg font-bold" data-path="about-us"
+          href="#">About Us</a><a
+          class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors"
+          data-path="solutions" href="#">Solutions</a><a
+          class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors"
+          data-path="app-features" href="#">App Features</a><a
+          class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors"
+          data-path="live-demo" href="#">Live Demo</a><a
+          class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors"
+          data-path="contact" href="#">Contact</a></nav>
+      <div class="flex items-center gap-space-md"><a
+          class="hidden sm:inline-flex items-center justify-center bg-primary-container text-on-primary font-label-lg text-label-lg rounded-full px-5 py-2.5 transition-colors hover:bg-primary hover:text-on-primary"
+          data-path="get-mobile-app" href="#">Get Mobile App</a>
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span
+            class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+      </div>
+    </div>
+  </header>
+  <main class="w-full pt-20 bg-surface">
+    <div class="flex flex-col w-full">
+      <!-- Subtle Atmospheric Mesh Gradients -->
+      <div class="relative w-full overflow-hidden">
+        <div class="absolute -top-32 -left-20 w-96 h-96 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div
+          class="absolute top-96 -right-20 w-[420px] h-[420px] bg-tertiary-fixed-dim/20 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <!-- 1. HERO SECTION -->
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 pt-8 pb-16 lg:pt-14 lg:pb-24">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <!-- Hero Text Content -->
+            <div class="lg:col-span-7 flex flex-col items-start space-y-6">
+              <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-surface-container shadow-sm">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#00AA13] animate-pulse"></span>
+                <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary">Hydrological Sensor Grid
+                  Live</span>
+                <span class="text-outline-variant font-label-sm">•</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">SAS Innovation IoT
+                  v3.4</span>
+              </div>
+              <h1 class="font-display-lg text-display-lg text-on-surface tracking-tight leading-tight">
+                Smart Flood Mitigation &amp; <span class="text-primary-container">Real-Time Water Level</span>
+                Monitoring
+              </h1>
+              <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                Empowering communities and municipalities with IoT telemetry, sub-second stream tracking, and automated
+                early warning alerts before flood disasters strike.
+              </p>
+              <div class="flex flex-wrap items-center gap-4 pt-2">
+                <a class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-primary transition-all duration-200"
+                  href="#simulator">
+                  <span>Explore Solution</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+                <a class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-surface-bright text-primary font-label-lg text-label-lg shadow-sm hover:bg-surface-container transition-all duration-200"
+                  href="#contact">
+                  <span class="material-symbols-outlined text-[18px]">chat_bubble_outline</span>
+                  <span>Contact Us</span>
+                </a>
+              </div>
+              <!-- Quick Telemetry Footnote -->
+              <div class="flex items-center gap-6 pt-4 text-on-surface-variant font-body-sm text-body-sm">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[18px]">cell_tower</span>
+                  <span>LoraWAN &amp; Cellular 4G Mesh</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+                  <span>99.98% System Uptime</span>
+                </div>
+              </div>
+            </div>
+            <!-- Hero Interactive Visual Dashboard Mockup (Floating 3D Angle) -->
+            <div class="lg:col-span-5 relative w-full">
+              <div
+                class="relative w-full max-w-md mx-auto rounded-3xl bg-surface-container-lowest p-6 shadow-xl transition-all hover:shadow-2xl">
+                <!-- Mockup Header -->
+                <div class="flex items-center justify-between pb-4">
+                  <div class="flex items-center gap-2.5">
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary shadow-sm">
+                      <span class="material-symbols-outlined text-[18px]">water_drop</span>
+                    </div>
+                    <div>
+                      <div class="font-headline-sm text-headline-sm text-on-surface leading-tight">Floodi Live</div>
+                      <div class="font-label-sm text-label-sm text-on-surface-variant">Zone 4 • Ciliwung Basin</div>
+                    </div>
+                  </div>
+                  <span
+                    class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-[#00AA13]/10 text-[#00AA13] tracking-wide">
+                    ● NORMAL / AMAN
+                  </span>
+                </div>
+                <!-- Dynamic Water Gauge Preview Widget -->
+                <div class="mt-2 rounded-2xl bg-surface-container-low p-4 flex items-center justify-between">
+                  <div>
+                    <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Live
+                      Surface Height</span>
+                    <div class="flex items-baseline gap-1 mt-1">
+                      <span class="font-display-lg text-display-lg text-on-surface font-bold tracking-tight">45</span>
+                      <span class="font-title-md text-title-md text-on-surface-variant">cm</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+                      <span class="material-symbols-outlined text-[#00AA13] text-[16px]">trending_down</span>
+                      <span>-3.2 cm/hr recess rate</span>
+                    </div>
+                  </div>
+                  <!-- Animated Wave Level Gauge Box -->
+                  <div
+                    class="relative w-20 h-28 rounded-xl bg-surface-container-highest overflow-hidden flex flex-col justify-end">
+                    <div
+                      class="absolute inset-x-0 bottom-0 bg-primary-container h-[38%] transition-all duration-700 flex items-center justify-center">
+                      <div class="w-full h-2 bg-inverse-primary/40 -mt-6 rounded-full blur-[1px] animate-pulse"></div>
+                    </div>
+                    <div
+                      class="absolute top-2 inset-x-0 text-center font-label-sm text-label-sm text-on-surface-variant">
+                      Gauge</div>
+                  </div>
+                </div>
+                <!-- Telemetry Status Badges -->
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                  <!-- Gateway Health -->
+                  <div class="p-3 rounded-xl bg-surface-container-low">
+                    <div class="flex items-center gap-1.5 text-primary">
+                      <span class="material-symbols-outlined text-[16px]">sensors</span>
+                      <span class="font-label-sm text-label-sm font-semibold">Gateway</span>
+                    </div>
+                    <div class="font-title-md text-title-md text-on-surface mt-1">Online</div>
+                    <div class="font-body-sm text-body-sm text-on-surface-variant">Battery 94% • Solar</div>
+                  </div>
+                  <!-- Station Alpha Status -->
+                  <div class="p-3 rounded-xl bg-surface-container-low">
+                    <div class="flex items-center gap-1.5 text-secondary">
+                      <span class="material-symbols-outlined text-[16px]">valve</span>
+                      <span class="font-label-sm text-label-sm font-semibold">Pump Alpha</span>
+                    </div>
+                    <div class="font-title-md text-title-md text-on-surface mt-1">Active</div>
+                    <div class="font-body-sm text-body-sm text-on-surface-variant">Gate Open 35%</div>
+                  </div>
+                </div>
+                <!-- Mini Rain Forecast Card -->
+                <div class="mt-3 p-3.5 rounded-xl bg-surface-container-high flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-[24px]">oil_barrel</span>
+                    <div>
+                      <div class="font-title-md text-title-md text-on-surface">Rainfall Probability: 78%</div>
+                      <div class="font-body-sm text-body-sm text-on-surface-variant">Heavy precipitation expected in 45m
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="font-label-sm text-label-sm bg-error-container text-on-error-container px-2 py-0.5 rounded-md">Alert
+                    Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 2. ABOUT SAS INNOVATION & FLOODI -->
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+          <!-- Mission statement banner -->
+          <div class="rounded-3xl bg-surface-container-low p-8 lg:p-12 shadow-sm relative overflow-hidden mb-12">
+            <div class="relative z-10 max-w-3xl">
+              <div class="flex items-center gap-2 mb-4">
+                <span
+                  class="px-3 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider">Our
+                  Mission</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant">Engineered by SAS Innovation</span>
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight tracking-tight">
+                "Floodi is a technology solution created to help communities anticipate flood threats with speed and
+                precision."
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-4 leading-relaxed">
+                From municipal drainage watersheds to high-density riverside neighborhoods, SAS Innovation blends
+                resilient edge-computing sensors with intelligent hydrological modeling. We believe early notification
+                saves not just physical property, but human lives.
+              </p>
+            </div>
+          </div>
+          <!-- 3 Pillar Feature Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Pillar 1 -->
+            <div
+              class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[24px]">radar</span>
+                </div>
+                <h3 class="font-title-lg text-title-lg text-on-surface">Real-Time IoT Data</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Industrial-grade ultrasonic and hydrostatic sensors continuously sampling depth levels with sub-second
+                  transmission intervals directly through rainstorms.
+                </p>
+              </div>
+              <div class="mt-6 flex items-center gap-2 font-label-sm text-label-sm text-primary uppercase font-bold">
+                <span>±1mm Accuracy</span>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </div>
+            </div>
+            <!-- Pillar 2 -->
+            <div
+              class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-[24px]">campaign</span>
+                </div>
+                <h3 class="font-title-lg text-title-lg text-on-surface">Early Warning Notifications</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Automated multi-tier alert dispatching through acoustic siren controllers, priority SMS bursts, and
+                  high-priority native mobile push notifications.
+                </p>
+              </div>
+              <div class="mt-6 flex items-center gap-2 font-label-sm text-label-sm text-secondary uppercase font-bold">
+                <span>Immediate Broadcast</span>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </div>
+            </div>
+            <!-- Pillar 3 -->
+            <div
+              class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+                  <span class="material-symbols-outlined text-[24px]">water_voc</span>
+                </div>
+                <h3 class="font-title-lg text-title-lg text-on-surface">Infrastructure Tracking</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Direct telemetry hooks connecting automated flood gates, retention basin pumps, and diesel backups to
+                  ensure 100% operational readiness when levels surge.
+                </p>
+              </div>
+              <div class="mt-6 flex items-center gap-2 font-label-sm text-label-sm text-tertiary uppercase font-bold">
+                <span>Automated Triggering</span>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 3. KEY FEATURES GRID -->
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+          <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Engineered For
+              Resilience</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Comprehensive Flood Intelligence Architecture
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Built to operate seamlessly under harsh weather environments, providing end-to-end visibility from water
+              catchments down to metropolitan river mouths.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Card 1 -->
+            <div
+              class="rounded-2xl bg-surface-container-lowest p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-primary mb-6">
+                  <span class="text-2xl">🌊</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Real-Time Water Level Monitoring</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Live continuous telemetry tracking river and drainage surface elevation down to the millimeter.
+                  Incorporates automated signal cross-checks to eliminate wave ripples and debris noise.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 flex items-center gap-2">
+                <span
+                  class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-[#00AA13]/10 text-[#00AA13]">Aman</span>
+                <span
+                  class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-[#F06400]/10 text-[#F06400]">Waspada</span>
+                <span
+                  class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-[#EE2737]/10 text-[#EE2737]">Bahaya</span>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div
+              class="rounded-2xl bg-surface-container-lowest p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-secondary mb-6">
+                  <span class="text-2xl">🔔</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Early Warning System</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Sub-second multi-channel alert delivery bypassing silent phone modes via critical alerts. Connects to
+                  emergency dispatch towers, field commanders, and community warning horns instantly.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 flex items-center gap-4 text-on-surface-variant font-label-sm text-label-sm">
+                <span class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined text-[18px] text-primary">sms</span> SMS Blast</span>
+                <span class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined text-[18px] text-primary">notifications_active</span> Push
+                  API</span>
+                <span class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined text-[18px] text-primary">volume_up</span> Siren Relay</span>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div
+              class="rounded-2xl bg-surface-container-lowest p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-tertiary mb-6">
+                  <span class="text-2xl">🚰</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Drainage &amp; Pump Infrastructure
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Continuous diagnostic monitoring of municipal pumps, gate actuators, fuel reserves, and power grids.
+                  Automatically triggers bypass spillways when predefined height thresholds are exceeded.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+                <span class="w-2 h-2 rounded-full bg-[#00AA13]"></span>
+                <span>Zero-touch automatic gate synchronization</span>
+              </div>
+            </div>
+            <!-- Card 4 -->
+            <div
+              class="rounded-2xl bg-surface-container-lowest p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center text-primary mb-6">
+                  <span class="text-2xl">📊</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Historical Data &amp; Analytics</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Access deep historical water logs, tidal fluctuation correlations, and seasonal rain data. Predictive
+                  machine learning models assist city planners in preparing regional mitigation tactics.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 flex items-center gap-2 font-label-sm text-label-sm text-primary">
+                <span class="material-symbols-outlined text-[18px]">insights</span>
+                <span>Predictive run-off simulation graphs included</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 4. INTERACTIVE APP SHOWCASE & WATER STATUS SIMULATOR -->
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 py-16" id="simulator">
+          <div class="rounded-3xl bg-surface-container-lowest p-8 lg:p-12 shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <!-- Simulator Controls -->
+              <div class="lg:col-span-5 space-y-6">
+                <div
+                  class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-primary uppercase font-bold">
+                  <span>Interactive Telemetry Demo</span>
+                </div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">
+                  Test Emergency Response Scenarios
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Toggle the flood severity stages below to see how Floodi dynamically updates sensory readouts,
+                  calculates alert status, and activates automated civil defenses.
+                </p>
+                <!-- State Toggle Buttons -->
+                <div class="flex flex-col gap-3 pt-2" id="simulator-buttons">
+                  <button
+                    class="sim-btn w-full flex items-center justify-between p-4 rounded-xl text-left transition-all bg-surface-container text-on-surface font-label-lg shadow-sm"
+                    id="btn-normal" onclick="setSimState('normal')">
+                    <div class="flex items-center gap-3">
+                      <span class="w-3.5 h-3.5 rounded-full bg-[#00AA13]"></span>
+                      <div>
+                        <div class="font-title-md text-title-md leading-none">Normal / Safe</div>
+                        <div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Water level &lt; 80 cm</div>
+                      </div>
+                    </div>
+                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                  </button>
+                  <button
+                    class="sim-btn w-full flex items-center justify-between p-4 rounded-xl text-left transition-all bg-surface-container-low text-on-surface font-label-lg hover:bg-surface-container"
+                    id="btn-caution" onclick="setSimState('caution')">
+                    <div class="flex items-center gap-3">
+                      <span class="w-3.5 h-3.5 rounded-full bg-[#F06400]"></span>
+                      <div>
+                        <div class="font-title-md text-title-md leading-none">Caution / Waspada</div>
+                        <div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Water level 80 cm - 180 cm
+                        </div>
+                      </div>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant">warning</span>
+                  </button>
+                  <button
+                    class="sim-btn w-full flex items-center justify-between p-4 rounded-xl text-left transition-all bg-surface-container-low text-on-surface font-label-lg hover:bg-surface-container"
+                    id="btn-danger" onclick="setSimState('danger')">
+                    <div class="flex items-center gap-3">
+                      <span class="w-3.5 h-3.5 rounded-full bg-[#EE2737] animate-ping"></span>
+                      <div>
+                        <div class="font-title-md text-title-md leading-none">Danger / Bahaya</div>
+                        <div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Water level &gt; 180 cm
+                        </div>
+                      </div>
+                    </div>
+                    <span class="material-symbols-outlined text-on-surface-variant">emergency</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Dynamic Display Visual Mockup Card -->
+              <div class="lg:col-span-7">
+                <div class="rounded-3xl p-8 transition-colors duration-500 bg-surface-container-low" id="sim-card-bg">
+                  <div class="flex items-center justify-between mb-6">
+                    <div>
+                      <div class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Active
+                        Hydro Sensor Node</div>
+                      <div class="font-headline-sm text-headline-sm text-on-surface">Sector 09 • River Bend Station
+                      </div>
+                    </div>
+                    <div
+                      class="px-4 py-1.5 rounded-full font-label-sm text-label-sm uppercase font-bold tracking-wider bg-[#00AA13]/10 text-[#00AA13]"
+                      id="sim-badge">
+                      Normal / Aman
+                    </div>
+                  </div>
+                  <!-- Height Display & Gauge Visualizer -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="space-y-4">
+                      <div class="p-4 rounded-2xl bg-surface-container-lowest shadow-sm">
+                        <span
+                          class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Reported
+                          Surface Level</span>
+                        <div class="flex items-baseline gap-2 mt-2">
+                          <span class="font-display-lg text-display-lg font-bold text-on-surface tracking-tight"
+                            id="sim-level-text">40</span>
+                          <span class="font-headline-sm text-headline-sm text-on-surface-variant">cm</span>
+                        </div>
+                      </div>
+                      <div class="p-4 rounded-2xl bg-surface-container-lowest shadow-sm space-y-2">
+                        <span
+                          class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">System
+                          Response Status</span>
+                        <p class="font-body-md text-body-md text-on-surface leading-snug" id="sim-status-note">
+                          Water level normal. No threat detected. Regular continuous telemetry sampling active.
+                        </p>
+                      </div>
+                    </div>
+                    <!-- Vertical Graphic Tank Column -->
+                    <div
+                      class="h-64 rounded-2xl bg-surface-container-lowest p-4 flex flex-col justify-between shadow-sm relative overflow-hidden">
+                      <div
+                        class="flex justify-between items-center z-10 font-label-sm text-label-sm text-on-surface-variant">
+                        <span>Critical (200cm)</span>
+                        <span class="text-[#EE2737] font-bold">Max Fill</span>
+                      </div>
+                      <div
+                        class="flex justify-between items-center z-10 font-label-sm text-label-sm text-on-surface-variant">
+                        <span>Warning (100cm)</span>
+                        <span class="text-[#F06400]">Mid</span>
+                      </div>
+                      <div
+                        class="flex justify-between items-center z-10 font-label-sm text-label-sm text-on-surface-variant">
+                        <span>Normal (0-80cm)</span>
+                        <span class="text-[#00AA13]">Base</span>
+                      </div>
+                      <!-- Animated Fill Tank Bar -->
+                      <div
+                        class="absolute inset-x-0 bottom-0 bg-primary-container transition-all duration-700 h-[20%] opacity-90"
+                        id="sim-water-bar">
+                        <div class="w-full h-3 bg-inverse-primary/60 blur-[1px]"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Automated Action Summary Strip -->
+                  <div
+                    class="mt-6 pt-4 flex flex-wrap items-center justify-between gap-4 font-body-sm text-body-sm text-on-surface-variant">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[18px] text-primary"
+                        id="sim-siren-icon">notifications</span>
+                      <span id="sim-siren-text">Civil Sirens: Standby</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[18px] text-primary"
+                        id="sim-pump-icon">water_pump</span>
+                      <span id="sim-pump-text">Gate Flow: Nominal Mode</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[18px] text-primary">sync</span>
+                      <span>Sync: 0.2s ago</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 5. IMPACT & NUMBERS COUNTER SECTION -->
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+          <div class="rounded-3xl bg-surface-container p-8 lg:p-14 shadow-sm">
+            <div class="text-center max-w-xl mx-auto mb-12 space-y-2">
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Proven Field
+                Reliability</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">Measurable Community Protection</h2>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+              <div class="space-y-2 p-4">
+                <div class="font-display-lg text-display-lg text-primary font-bold tracking-tight">100+</div>
+                <div class="font-title-md text-title-md text-on-surface">IoT Sensors Deployed</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Active across urban waterways</p>
+              </div>
+              <div class="space-y-2 p-4">
+                <div class="font-display-lg text-display-lg text-primary font-bold tracking-tight">24/7</div>
+                <div class="font-title-md text-title-md text-on-surface">Real-Time Telemetry</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Automated uninterrupted logging</p>
+              </div>
+              <div class="space-y-2 p-4">
+                <div class="font-display-lg text-display-lg text-primary font-bold tracking-tight">&lt; 0.5s</div>
+                <div class="font-title-md text-title-md text-on-surface">Alert Latency</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Near-instant emergency broadcast</p>
+              </div>
+              <div class="space-y-2 p-4">
+                <div class="font-display-lg text-display-lg text-primary font-bold tracking-tight">10,000+</div>
+                <div class="font-title-md text-title-md text-on-surface">Protected Residents</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">Safer living in flood-prone basins</p>
+              </div>
+            </div>
+            <!-- Municipal Validation Badges -->
+            <div
+              class="mt-12 pt-8 flex flex-wrap items-center justify-center gap-8 text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+                <span>Municipal Flood Management</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[20px]">domain</span>
+                <span>Smart City Initiative Compatible</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[20px]">security</span>
+                <span>Civil Protection Certified</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 6. CONTACT & SUPPORT SECTION -->
+        <section class="max-w-7xl mx-auto px-6 lg:px-12 pt-8 pb-24" id="contact">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Direct Contact Information Cards -->
+            <div class="lg:col-span-5 space-y-6">
+              <div class="space-y-2">
+                <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Connect With
+                  Us</span>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">Partner With SAS Innovation</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Deploy Floodi in your municipality, industrial complex, or residential community. Our field
+                  engineering team is ready to assist.
+                </p>
+              </div>
+              <!-- Cards Stack -->
+              <div class="space-y-4">
+                <!-- WhatsApp Card -->
+                <a class="flex items-center justify-between p-4 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow"
+                  href="https://wa.me/6281358008183" rel="noopener noreferrer" target="_blank">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-[#00AA13]/10 flex items-center justify-center text-[#00AA13]">
+                      <span class="material-symbols-outlined text-[24px]">chat</span>
+                    </div>
+                    <div>
+                      <div class="font-label-sm text-label-sm uppercase text-on-surface-variant">WhatsApp Direct</div>
+                      <div class="font-title-md text-title-md text-on-surface font-semibold">+62 813 5800 8183</div>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-primary">arrow_outward</span>
+                </a>
+                <!-- Instagram Card -->
+                <a class="flex items-center justify-between p-4 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow"
+                  href="https://instagram.com/floodi_id" rel="noopener noreferrer" target="_blank">
+                  <div class="flex items-center gap-4">
+                    <div
+                      class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+                      <span class="material-symbols-outlined text-[24px]">photo_camera</span>
+                    </div>
+                    <div>
+                      <div class="font-label-sm text-label-sm uppercase text-on-surface-variant">Instagram</div>
+                      <div class="font-title-md text-title-md text-on-surface font-semibold">@floodi_id</div>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-primary">arrow_outward</span>
+                </a>
+                <!-- SAS Innovation Engineering Lab -->
+                <div class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm space-y-3">
+                  <div class="flex items-center gap-3 text-primary">
+                    <span class="material-symbols-outlined text-[20px]">science</span>
+                    <span class="font-title-md text-title-md font-semibold text-on-surface">SAS Innovation IoT
+                      Lab</span>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Advanced Hydrological Hardware &amp; Early Alert Research Division.<br />
+                    Operating Hours: Monday – Friday, 08:00 – 18:00 WIB.<br />
+                    24/7 Automated Emergency Dispatch Systems Active.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Modern Inquiry Form -->
+            <div class="lg:col-span-7">
+              <div class="rounded-3xl bg-surface-container-lowest p-8 lg:p-10 shadow-lg">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Request Deployment or Consultation
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                  Complete the form below to receive sensor specifications, pilot installation quotes, and API
+                  integration guides.
+                </p>
+                <form class="space-y-5" onsubmit="handleInquirySubmit(event)">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="space-y-1.5">
+                      <label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Full
+                        Name</label>
+                      <input
+                        class="w-full px-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+                        placeholder="e.g. Budi Santoso" required="" type="text" />
+                    </div>
+                    <div class="space-y-1.5">
+                      <label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Work
+                        Email</label>
+                      <input
+                        class="w-full px-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+                        placeholder="budi@gov.id or corporate" required="" type="email" />
+                    </div>
+                  </div>
+                  <div class="space-y-1.5">
+                    <label
+                      class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Organization
+                      / Government Agency</label>
+                    <input
+                      class="w-full px-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+                      placeholder="e.g. BPBD Regional / Housing Estate Management" required="" type="text" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Inquiry
+                      &amp; Monitoring Location Details</label>
+                    <textarea
+                      class="w-full px-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all"
+                      placeholder="Describe your target waterway, river basin, or residential drainage challenges..."
+                      required="" rows="4"></textarea>
+                  </div>
+                  <div
+                    class="hidden p-3.5 rounded-xl bg-[#00AA13]/15 text-[#00AA13] font-body-sm text-body-sm items-center gap-2"
+                    id="form-success">
+                    <span class="material-symbols-outlined text-[20px]">check_circle</span>
+                    <span>Thank you! Your inquiry has been forwarded to SAS Innovation engineers. We will reach out
+                      shortly.</span>
+                  </div>
+                  <button
+                    class="w-full py-4 rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:bg-primary transition-all flex items-center justify-center gap-2"
+                    type="submit">
+                    <span>Send Inquiry</span>
+                    <span class="material-symbols-outlined text-[18px]">send</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script>
+      function setSimState(state) {
+        const btnNormal = document.getElementById('btn-normal');
+        const btnCaution = document.getElementById('btn-caution');
+        const btnDanger = document.getElementById('btn-danger');
+
+        const badge = document.getElementById('sim-badge');
+        const levelText = document.getElementById('sim-level-text');
+        const statusNote = document.getElementById('sim-status-note');
+        const waterBar = document.getElementById('sim-water-bar');
+        const sirenText = document.getElementById('sim-siren-text');
+        const sirenIcon = document.getElementById('sim-siren-icon');
+        const pumpText = document.getElementById('sim-pump-text');
+
+        // Reset button base styling
+        [btnNormal, btnCaution, btnDanger].forEach(b => {
+          b.classList.remove('bg-surface-container');
+          b.classList.add('bg-surface-container-low');
+        });
+
+        if (state === 'normal') {
+          btnNormal.classList.add('bg-surface-container');
+          btnNormal.classList.remove('bg-surface-container-low');
+
+          badge.className = "px-4 py-1.5 rounded-full font-label-sm text-label-sm uppercase font-bold tracking-wider bg-[#00AA13]/10 text-[#00AA13]";
+          badge.textContent = "Normal / Aman";
+          levelText.textContent = "40";
+          statusNote.textContent = "Water level normal. No threat detected. Regular continuous telemetry sampling active.";
+          waterBar.style.height = "20%";
+          waterBar.className = "absolute inset-x-0 bottom-0 bg-primary-container transition-all duration-700 opacity-90";
+          sirenText.textContent = "Civil Sirens: Standby";
+          sirenIcon.className = "material-symbols-outlined text-[18px] text-primary";
+          pumpText.textContent = "Gate Flow: Nominal Mode";
+        } else if (state === 'caution') {
+          btnCaution.classList.add('bg-surface-container');
+          btnCaution.classList.remove('bg-surface-container-low');
+
+          badge.className = "px-4 py-1.5 rounded-full font-label-sm text-label-sm uppercase font-bold tracking-wider bg-[#F06400]/10 text-[#F06400]";
+          badge.textContent = "Caution / Waspada";
+          levelText.textContent = "120";
+          statusNote.textContent = "Advisory level reached! Automated SMS notifications dispatched to regional field operators.";
+          waterBar.style.height = "55%";
+          waterBar.className = "absolute inset-x-0 bottom-0 bg-[#F06400] transition-all duration-700 opacity-90";
+          sirenText.textContent = "Civil Sirens: Advisory Armed";
+          sirenIcon.className = "material-symbols-outlined text-[18px] text-[#F06400]";
+          pumpText.textContent = "Gate Flow: 65% Open (Discharging)";
+        } else if (state === 'danger') {
+          btnDanger.classList.add('bg-surface-container');
+          btnDanger.classList.remove('bg-surface-container-low');
+
+          badge.className = "px-4 py-1.5 rounded-full font-label-sm text-label-sm uppercase font-bold tracking-wider bg-[#EE2737]/15 text-[#EE2737] animate-pulse";
+          badge.textContent = "Danger / Bahaya";
+          levelText.textContent = "240";
+          statusNote.textContent = "CRITICAL FLOOD RISK! High priority mobile broadcasts sent, backup water pump stations fully triggered!";
+          waterBar.style.height = "92%";
+          waterBar.className = "absolute inset-x-0 bottom-0 bg-[#EE2737] transition-all duration-700 opacity-95";
+          sirenText.textContent = "Civil Sirens: ACTIVE BROADCAST";
+          sirenIcon.className = "material-symbols-outlined text-[18px] text-[#EE2737] animate-bounce";
+          pumpText.textContent = "Pumps Alpha & Beta: 100% MAXIMUM FLOW";
+        }
+      }
+
+      function handleInquirySubmit(e) {
+        e.preventDefault();
+        const banner = document.getElementById('form-success');
+        if (banner) {
+          banner.classList.remove('hidden');
+          banner.classList.add('flex');
+        }
+        e.target.reset();
+      }
+    </script>
+  </main>
+  <footer class="w-full bg-on-tertiary-fixed text-surface-bright pt-space-xl pb-space-lg">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 gap-space-xl pb-space-xl border-b border-surface-container-highest/10">
+        <div class="space-y-space-md md:col-span-1">
+          <div class="flex items-center gap-space-sm"><img alt="Floodi Logo"
+              class="h-8 w-auto object-contain brightness-0 invert"
+              src="https://lh3.googleusercontent.com/aida/AEtjO1UYg_fvkYp3nUjfxk7G1Pnhk3qpoH43n1zEk_IgUwaG0ysZ6kD0L3-maC9U73RHKTX8JfyaSkbd2aaTwUFp8Ef4oVU5CIufO-mKNPr9uXO1Wt2BuzjoulVaJeTgf4YQPXxMSVyAalUWP0VsQLoYsZDKClCiFdf3xLT-oqfPQ7gCMcioyDdlj0m_9uxn-bUMBc74MBPVy4NLT9meDT4zRn9jMWYO-0czrI_STwI4sPg0phTDTS92YBLIVPYq" /><span
+              class="font-headline-sm text-headline-sm text-surface-bright tracking-tight">Floodi</span></div>
+          <p class="font-body-sm text-body-sm text-surface-variant/80">Next-generation IoT telemetry and early flood
+            warning infrastructure engineered by SAS Innovation.</p>
+          <div class="flex items-center gap-space-sm"><a
+              class="w-8 h-8 rounded-full bg-surface-container-highest/10 flex items-center justify-center text-surface-bright hover:bg-surface-container-highest/20 transition-colors"
+              href="#"><span class="material-symbols-outlined text-[16px]">public</span></a><a
+              class="w-8 h-8 rounded-full bg-surface-container-highest/10 flex items-center justify-center text-surface-bright hover:bg-surface-container-highest/20 transition-colors"
+              href="#"><span class="material-symbols-outlined text-[16px]">share</span></a><a
+              class="w-8 h-8 rounded-full bg-surface-container-highest/10 flex items-center justify-center text-surface-bright hover:bg-surface-container-highest/20 transition-colors"
+              href="#"><span class="material-symbols-outlined text-[16px]">mail</span></a></div>
+        </div>
+        <div class="space-y-space-sm"><span
+            class="font-label-lg text-label-lg text-surface-bright uppercase tracking-wider block">Solutions</span>
+          <ul class="space-y-space-xs">
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">Hydrological Telemetry</a></li>
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">Urban Runoff Detection</a></li>
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">Reservoir Surge Dispatch</a></li>
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">Emergency Broadcast Mesh</a></li>
+          </ul>
+        </div>
+        <div class="space-y-space-sm"><span
+            class="font-label-lg text-label-lg text-surface-bright uppercase tracking-wider block">Platform</span>
+          <ul class="space-y-space-xs">
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">iOS &amp; Android Client</a></li>
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">Sensor Hardware Hub</a></li>
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">Public API &amp; Telemetry</a></li>
+            <li class="font-body-sm text-body-sm text-surface-variant/75 hover:text-surface-bright transition-colors"><a
+                href="#">System Uptime</a></li>
+          </ul>
+        </div>
+        <div class="space-y-space-sm"><span
+            class="font-label-lg text-label-lg text-surface-bright uppercase tracking-wider block">Contact Us</span>
+          <div class="space-y-space-xs font-body-sm text-body-sm text-surface-variant/75">
+            <p class="flex items-start gap-space-xs"><span
+                class="material-symbols-outlined text-[16px] text-primary-fixed">location_on</span>SAS Innovation Labs,
+              Tech District 4</p>
+            <p class="flex items-center gap-space-xs"><span
+                class="material-symbols-outlined text-[16px] text-primary-fixed">mail</span>telemetry@sasinnovation.com
+            </p>
+            <p class="flex items-center gap-space-xs"><span
+                class="material-symbols-outlined text-[16px] text-primary-fixed">call</span>+1 (800) 555-FLOD</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-surface-variant/60 font-body-sm text-body-sm">
+        <div>© 2025 SAS Innovation. All rights reserved.</div>
+        <div class="flex items-center gap-6"><a class="hover:text-surface-bright transition-colors" href="#">Privacy
+            Policy</a><a class="hover:text-surface-bright transition-colors" href="#">Terms of Service</a><a
+            class="hover:text-surface-bright transition-colors" href="#">Sensor Regulatory Compliance</a></div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
