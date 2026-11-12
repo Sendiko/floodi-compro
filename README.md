@@ -30,3 +30,16 @@ docker run --rm --env-file .env -p 8080:8080 floodi-compro
 ```
 
 The container includes a health check for the homepage.
+
+## Run with Docker Compose
+
+```sh
+cp .env.example .env
+docker compose up --build
+```
+
+Stop the service with:
+
+```sh
+docker compose down
+```
