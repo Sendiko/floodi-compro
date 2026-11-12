@@ -1,0 +1,8 @@
+.git
+.gitignore
+.dockerignore
+node_modules
+package-lock.json
+*.docx
+*.pdf
+proposal_extracted.txt

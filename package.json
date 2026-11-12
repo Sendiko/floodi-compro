@@ -1,16 +1,15 @@
 {
   "name": "floodi-compro",
   "version": "1.0.0",
-  "description": "Static HTML hosting with Express",
+  "description": "Static website served with Bun",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "bun run server.js",
+    "dev": "bun --watch server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies": {
-    "express": "^5.1.0"
-  }
+  "packageManager": "bun@1.4.4"
 }

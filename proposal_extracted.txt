@@ -1,0 +1,319 @@
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 1 of 11
+Abstrak (Maksimal 500 kata)
+Pembangunan sistem automatisasi pompa air berbasis Internet of Things (IoT) merupakan
+solusi inovatif untuk mengurangi dampak banjir di Desa Bojongsoang. Teknologi ini
+dirancang untuk mempercepat proses penyurutan air, sehingga dapat meminimalisir risiko
+banjir serta dampak sosial dan ekonomi bagi masyarakat. Studi ini bertujuan untuk
+merancang dan mengimplementasikan sistem pompa air otomatis yang terintegrasi dengan
+sensor ketinggian air berbasis IoT. Sistem ini memungkinkan pemantauan dan
+pengoperasian pompa secara real-time, sehingga dapat merespons kondisi banjir dengan
+lebih cepat dan efektif.
+Metodologi yang digunakan dalam penelitian ini mencakup survei lapangan, analisis
+kebutuhan, perancangan sistem, serta pengujian prototipe. Data primer dan sekunder
+dikumpulkan untuk mengevaluasi kondisi lingkungan, menyesuaikan kebutuhan sistem
+automatisasi pompa air, serta meninjau infrastruktur teknologi yang tersedia di Desa
+Bojongsoang. Berdasarkan hasil analisis, sistem automatisasi pompa air dalam rangka
+pengurangan volume air pada saat banjir dikembangkan dengan menggunakan water level
+sensor, buzzer dan pompa air, yang terhubung ke jaringan IoT (Internet of Things).
+Pada penelitian sebelumnya telah dibangun early warning untuk pemantauan kondisi banjir
+menggunakan water level sensor dan buzzer yang dapat menginformasikan status
+ketinggian air di lingkungan wilayah bojongsoang, sehingga pada kegiatan pengabdian
+masyarakat periode ini akan diintegrasikan dengan pompa air dalam rangka mempercepat
+surutnya air pada saat banjir.
+Dengan demikian, pengembangan sistem automatisasi pompa air berbasis IoT ini akan
+memberikan kontribusi secara signifikan dalam meminimalisir dampak bencana serta
+mendukung pembangunan berkelanjutan di Desa Bojongsoang. Selain itu, hasil studi ini
+dapat menjadi landasan bagi pengembangan teknologi serupa di daerah pedesaan lainnya
+dengan kondisi lingkungan yang serupa.
+1. Pendahuluan (Maksimal 2000 kata)
+0.1. Latar Belakang (Menjelaskan profil masyarakat sasar dan masalah yang
+dihadapi)
+Mitra pada penelitian ini adalah Desa Bojongsoang yang teletak di bagian selatan
+Kabupaten Bandung. Desa ini memiliki luas wilayah ±395,5 hektar dan mempunyai jumlah
+penduduk ±17.285 jiwa. Desa Bojongsoang memiliki peran strategis sebagai jalur akses dan
+mobilitas antar kecamatan, khususnya Bandung Kidul, serta sebagai penghubung  jalan
+menuju Kota Bandung bagian utara dan berbagai instansi pendidikan. Secara geografis,
+Desa Bojongsoang berada di tengah Cekungan Bandung, yang menjadikannya sangat
+rentan terhadap banjir, terutama pada musim hujan.
+Lokasi implementasi progra ini tepatnya berada di RT 03 RW 10, yang merupan wilayah
+paling parah terdampak banjir setiap musim hujan. RW 10 ini berada di dekat aliran Sungai
+proposal_MIA_TBH_RIM.docx
+
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 2 of 11
+Citarum, sehingga saat terjadi hujan deras, sungai sering meluap dan menyebabkan banjir
+yang serius di wilayah ini. Saat ini, wilayah tersebut telah dilengkapi dengan sistem
+monitoring ketinggian air berbasis IoT sebagai upaya mitigasi banjir dan peringatan dini bagi
+warga. Namun, masih diperlukan sistem automatisasi pompa air untuk mempercepat
+penyurutan air ketika banjir terjadi, sehingga dampaknya dapat diminimalkan.
+Menurut keterangan dari perangkat desa, Desa Bojongsoang sering terdampak banjir. Pada
+tanggal 11 September 2024, banjir merendam sebagian wilayah desa dengan ketinggian air
+mencapai 30-100 cm. Banjir ini menyebabkan kerugian material yang cukup signifikan.
+Sayangnya, tidak ada berkas pasti yang dapat menghitung perkiraan kerugian yang
+ditimbulkan, namun kerugiannya cukup besar, ujar Bapak Lukman selaku perangkat desa.
+Sebanyak 696 kepala keluarga terdampak, termasuk fasilitas umum dan tempat ibadah
+yang ikut terendam. Jalan Raya Cijagra pun tidak dapat dilalui kendaraan darat karena
+genangan air yang tinggi. Banjir di Desa Bojongsoang terjadi akibat curah hujan yang
+sangat lebat, sehingga menyebabkan sungai-sungai di sekitar desa meluap. Selain itu, letak
+Desa Bojongsoang yang berada di Cekungan Bandung juga menjadi penyebab luapan
+sungai dan air hujan mudah menggenangi wilayah ini. Secara geografis, desa ini sulit untuk
+menerapkan upaya pencegahan banjir lainnya, selain dengan meninggikan wilayah desa.
+Kondisi ini menjadikan Desa Bojongsoang sangat rentan terhadap banjir, terutama saat
+musim hujan tiba.
+Warga Desa Bojongsoang telah berupaya semaksimal mungkin untuk  menghadapi banjir,
+salah satunya dengan memanfaat teknologi digital melalui sistem monitoring ketinggian air
+berbasis IoT. Sistem ini memungkinkan pemantauan dan pengambilan tindakan lebih cepat
+dalam situasi darurat. Meskipun demikian, sistem ini masih memerlukan peningkatan lebih
+lanjut. Oleh karena itu, diperlukan solusi tambahan yang dapat membantu warga
+mempercepat proses penyurutan air akibat banjir agar dampaknya dapat diminimalisir dan
+mempercepat pemulihan sehingga warga dapat segera kembali beraktivitas normal.
+Sebagai solusi untuk mengatasi permasalahan ini, dalam program Pengabdian Masyarakat
+Telkom University diusulkan pembangunan sistem automatisasi popa air. Sistem ini
+dirancang untuk mengaktifkan pompa air secara otomatis ketika ketinggian air mencapai
+ambang batas tertentu. Sistem ini akan terhubung dengan sensor ketinggian air atau water
+level sensor yang mengirimkan data ke server pusat, yang kemudian akan memicu aktivasi
+pompa air untuk menyedot air ke saluran pembuangan atau penampungan yang telah
+disediakan.
+0.1. Potensi Pemberdayaan Masyarakat Sasar
+Desa Bojongsoang merupakan sebuah wilayah pemerintahan desa, agar pembangunan
+dapat dirasakan secara merata maka diperlukan aparat pemerintahan yang membuat
+perencanaan dan melaksanakan pembangunan yang tepat. Selain aparat pemerintahan,
+peran aktif semua lapisan masyarakat juga harus di bangun dengan baik agar roda
+penggerak pembangunan sinergi antara aparat pemerintahan dengan masyarakat dapat
+dinikmati dan dirasakan oleh seluruh masyarakat.
+Desa Bojongsoang saaat ini memiliki sebanyak 17 RW dan 106 RT dengan luas wilayah
+keseluruhan sebesar ±395,5 hektar.
+Adapun Batas Wilayah Desa Bojongsoang Adalah Sebagai Berikut :
+a. Sebelah utara berbatasan dengan Desa Citeureup
+b. Sebelah selatan berbatasan dengan Desa Cikarees
+c. Sebelah barat berbatasan dengan Desa Dayeuhkolot
+d. Sebelah timur berbatasan dengan Desa Lengkong
+Desa Bojongsoang dilihat dari letak geografisnya terletak pada 107.63103248707988 Bujur
+Timur Dan -6.988991078518436 Lintang Selatan.
+Sedangkan berdasarkan topografinya sebagian besar wilayah di luar kawasan hutan
+merupakan dataran dengan ketinggian di atas permukaan laut dengan ketinggian pada
+posisi 700 dpl. Sebagian besar RW terletak diluar kawasan hutan.
+Kegiatan pemerintah  desa utamanya dilaksanakan di kantor kepala desa/ lurah, kantor
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 3 of 11
+Desa Bojongsoang sendiri merupakan aset desa / kelurahan, secara kontruksi masih layak
+untuk dipergunakan dan lokasi kantor kepala desa / lurah berada di dalam wilayah desa/
+kelurahan.
+Dalam upaya pengembangan desa, Desa Bojongsoang menginisiasi program
+pemberdayaan masyarakat melalui implementasi sistem penyedot air otomatis berbasis IoT
+untuk mengatasi banjir. Program ini bertujuan untuk meningkatkan ketangguhan desa dalam
+menghadapi bencana serta memanfaatkan teknologi digital sebagai solusi inovatif. Setiap
+desa di Indonesia memiliki karakteristik dan tantangan yang berbeda, sehingga pendekatan
+berbasis teknologi seperti ini dapat menjadi solusi yang lebih adaptif terhadap kondisi lokal.
+Selain itu, penerapan teknologi digital juga berkontribusi dalam mendukung pembangunan
+berkelanjutan dan meningkatkan kesejahteraan masyarakat.
+Adapun potensi fisik terdiri dari :
+1. Topografi (dataran rendah yang rentan banjir)
+2. Lokasi dekat Sungai Citarum (sering meluap ketika hujan deras)
+3. Iklim (Suhu udara/ curah hujan)
+4. Infrastruktur Drainase (belum cukup optimal untuk menampung volume air yang
+besar)
+5. Teknologi Digital (telah memanafaatkan teknologi digital sebagai solusi untuk
+mengatasi permasalahan di Desa)
+Ditampilkannya potensi non fisik seperti:
+1. Kondisi Masyarakat (tunjukan sifat gotong royong yang kuat)
+2. Lembaga Sosial (Peran serta seperti PKK,Karang Taruna)
+3. Kreativitas Aparatur Desa (Tampilkan inovasi desa)
+Pada Gambar 3 menunjukkan lokasi dari Desa Bojongsoang.
+Gambar 3. Desa Bojongsoang
+ 
+1. Solusi Permasalahan (Maksimal 1500 kata)
+Solusi Pengabdian Masyarakat yang Ditawarkan (Berisi uraian semua solusi yang
+ditawarkan secara sistematis)
+Desa Bojongsoang dalam menghadapi permasalahan banjir melalui pemanfaatan teknologi
+sangat berpotensi jika mengimplementasikan sistem penyedot air berbasis Internet of
+
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 4 of 11
+Things (IoT) yang terhubung dengan sistem monitoring ketinggian air yang telah dibangun
+sebelumnya di RT 03 RW 10. Pada Gambar 1 menunjukkan kondisi wilayah yang sering
+mengalami genangan air tinggi akibat sistem drainase yang kurang optimal dan
+meningkatnya intensitas curah hujan.
+Gambar 1. Lokasi Implementasi
+Pada Gambar 1 menunjukkan lokasi implementasi sistem monitoring ketinggian air, yang
+telah dipasang untuk mendeteksi perubahan tinggi permukaan air di daerah rawan banjir.
+Namun, sistem monitoring ketinggian air ini hanya berfungsi sebagai alat pemantau tanpa
+adanya mekanisme penanganan langsung terhadap kenaikan air yang terjadi. Oleh sebab
+itu, dapat dioptimalkan melalui pembangunan sistem penyedot air otomatis berbasis Internet
+of Things untuk mempercepat penyurutan air dan mengurangi dampak banjir terhadap
+pemukiman warga. Maka diharapkan juga dengan adanya sistem ini, masyarakat dapat
+lebih siap dalam menghadapi bencana banjir serta mengurangi risiko kerugian akibat
+genangan air yang berkepanjangan. Selain itu, integrasi antara sistem monitoring ketinggian
+air dan sistem penyedot air otomatis dapat menjadi solusi jangka panjang dalam upaya
+mitigasi banjir di Desa Bojongsoang.
+1. Metode Pelaksanaan (Maksimal 2000 kata)
+0.1. Metode dan Tahapan Pengabdian kepada Masyarakat
+Metode dan tahapan pengabdian masyarakat ditunjukkan oleh Gambar 3
+
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 5 of 11
+ 
+                                      Gambar 3. Metode pelaksanaan Abdimas
+Pada gambar 3 menunjukkan metode penelitian yang akan digunakan dalam implementasi
+sistem automasi pompa air dalam rangka pengurangan volume air pada saat banjir di Desa
+Bojongsoang. Tahapan ini terdiri dari :
+1. Communication
+Communication merupakan tahapan yang dilakukan untuk mencari permasalahan yang
+dialami oleh mitra, dalam hal ini Desa Bojongsoang, terkait dengan proses penanganan
+banjir. Dari permasalahan tersebut, maka akan dirumuskan kebutuhan user dalam
+menyelesaikan permasalahan tersebut. Selain itu, pada tahapan ini juga dilakukan studi
+literatur yang dapat mendukung solusi dari permasalahan yang dialami oleh mitra.
+2. Quick Planning
+Quick Planning merupakan tahapan yang dilakukan untuk melakukan
+perencanaan dalam penyelesaian masalah yang dihadapi oleh mitra. Tahapan ini
+dilakukan degan mengidentifikasi topologi IoT yang akan diimplementasikan di mitra,
+identifikasi kebutuhan hardware serta kebutuhan software dalam rangka
+membangun sistem automasi pompa air di Desa Bojongsoang.
+3. Modelling
+Setelah proses Quick planning ditentukan,maka tahapan yang penting yaitu melakukan
+simulasi dari topologi yang dibangun. Tahapan ini dilakukan dengan membuat sebuah
+pemodelan dari system yang akan dibuat sehingga proses modelling ini akan
+menunjukkan bahwa semua system yang dibangun dapat berjalan dengan baik.
+Sehingga proses ini  dapat menentukan jumlah dan jenis perangkat yang akan
+digunakan agar dapat berfungsi secara optimal.
+4. Construction of Prototype
+Tahapan ini merupakan tahapan untuk membangun pemodelan system yang telah
+disimulasikan sebelumnya. Sehinga melalui pembangunan prototype diharapkan dapat
+menunjukkan system automasi pompa air secara real yang akan digunakan untuk
+mengendalikan pompa penyedot air secara otomatisi sesaui dengan kondisi lingkungan
+di Desa Bojongsoang. Melalui system ini pula dilakukan pengujian skala lab agar system
+dapat menunjukkan fungsionalitasnya dengan baik sebelum dibuat dalam skala yang
+lebih besar
+5. Deployment, Delivery and Feedback
+Tahapan berikutnya yaitu mengembangkan prototype untuk dibuat system secara real di
+lapangan. Melalui pengembangan system dengan ukuran yang sesuai dengan
+kebutuhan lapangan maka system yang dibangun siap untuk diserahterimakan ke mitra.
+Pada tahapan ini juga dilakukan evaluasi penggunaan system oleh mitra sehingga
+melaui feedback yang diberikan, tim pengembang dapat melakukan evaluasi terhadap
+
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 6 of 11
+performansi system yang dibangun.
+0.1. Uraian Partisipasi Mitra
+Peran mitra dalam kegiatan pengabdian masyarakat ini yaitu :
+1. Menyediakan lahan yang akan digunakan untuk implementasi sistem automasi
+pompa air.
+2. Mitra menyediakan listrik sebagai sarana operasional dan pengujian sistem.
+3. Mitra terlibat aktif dalam kegiatan pembangunan dan perawatan sistem automasi
+pompa air.
+4. Mitra terlibat menjadi peserta workshop pelatihan penggunaan dan pemeliharaan
+sistem automasi pompa air.
+5. Mitra terlibat dalam penandatanganan kerjasama dengan Telkom University untuk
+pelaksanaan program lainnya.
+0.1. Potensi Keberlanjutan Program dan Kesesuaian Roadmap KK (Mohon
+dijelaskan secara singkat ketersesuaian kegiatan dengan Roadmap KK dan mohon
+dilampirkan gambar Roadmap KK)
+Kegiatan pengabdian masyaraka yang dilaksanakan di Desa Bojongsoang telah sesuai
+dengan roadmap KK.AITM . Adapun roadmao KK AITM dapat terlihat pada Gambar 4
+dibawah ini.
+Gambar 4. Roadmap KK AITM
+Adapun potensi keberlanjutan dari program ini yaitu melakukan pelatihan apparat desa
+dalam pengelolaan website Desa agar informasi yang disampaikan lebih optimal. Selain iitu
+program lainnya yang dapat dikembangkan untuk mitra yaitu pembangunan website
+monitoring CCTV untuk melakukan monitoring banjir di wilayah Desa Bojongsoang.
+1. Target Luaran
+
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 7 of 11
+Luaran kegiatan Pengabdian kepada Masyarakat adalah seperti berikut:
+Luaran Jenis Luaran Indikator Capaian
+Luaran Wajib 1. Prosiding seminar hasil
+Abdimas, atau jurnal ilmiah,
+atau HKI 
+2. Publikasi di media massa; 
+3. Video Kegiatan 
+(WAJIB TERCAPAI) 
+1. Prosiding  status submit
+2. Publikasi di media massa
+dengan status terbit
+3. Video di web Prodi
+dengan status publish
+Luaran Lain 1. Hak cipta
+2. Modul Penggunaan sistem
+automatisasi pompa air
+3. MoA
+ 
+1. Hak cipta dengan status
+terdaftar 
+2. Modul dengan status
+terbit
+3. MoA sudah ditanda
+tangani kedua belah pihak
+5. Rencana Anggaran dan Jadwal
+0.1. Rencana Penggunaan Anggaran
+0.0.1. Bahan Habis Pakai (A)
+No Keterangan Rincian Jumlah
+1 Pompa celup sedot banjir 2hp
+3inchi 220V pomoa celup sedot
+banjir 3"
+Rp. 2.500.000 Rp. 2.500.000
+2 Paket Perangkat Pipa dan
+paralon
+Rp. 2.000.000 Rp. 2.000.000
+4 Kabel 1 roll  x Rp. 750.000 Rp. 750.000  
+5 Konsumsi dan makan siang 3 x 6 x 50.000 Rp. 900.000
+6 Paket internet mitra 4 x Rp. 75.000 Rp. 300.000
+Total (A) Rp. 6.450.000
+0.0.1. Biaya Transportasi dan Perjalanan (B)
+No Keterangan Rincian Jumlah
+1 Transport survei lokasi 1 x Rp. 100.000 Rp. 100.000
+2 Transportasi pemasangan 1 x Rp. 300.000 Rp. 300.000
+3 Transportasi Mahasiswa 3 x Rp. 300.000 Rp. 900.000
+Total (B) Rp. 1.300.000
+0.0.1. Biaya Administrasi dan Diseminasi (C)
+No Keterangan Rincian Jumlah
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 8 of 11
+1 ATK dan materai 1 x Rp. 100.000 Rp. 100.000
+2 Workshop draft paper 1 x Rp. 500.000 Rp. 500.000
+3
+4
+Total (C) Rp. 600.000
+Total Penyerapan Biaya (A+B+C) Rp. 8.350.000
+0.1. Jadwal Pelaksanaan Pengabdian kepada Masyarakat
+Pelaksanaan kegiatan penagbdian masyarakat di Desa Bojongsoang ditunjukkan oleh Tabel 1.
+Tabel 1. Jadwal Pelaksanaan Kegiatan Pengabdian Masyarakat Desa Bojongsoang
+Aktivitas
+Bulan
+1-2 3-4 5-6 7-8 9-10 11-12
+Communication
+Planning
+Modelling
+Construction
+Deployment
+Delivery
+Feedback
+1. Daftar Pustaka
+1.        Ryu JH, Subah Z, Baek J. An Application of System Dynamics to Characterize Crop
+Production for Autonomous Indoor Farming Platforms (AIFP). Horticulturae. 2023 Dec
+7;9(12):1318.
+2.        Firdaus ISM, Fikri MR, Rosmiati M. Monitoring And Controlling Smart Hidroponics
+Using Android and Web Application. In: 2021 3rd East Indonesia Conference on
+Computer and Information Technology (EIConCIT) [Internet]. Surabaya, Indonesia: IEEE;
+2021 [cited 2024 Feb 16]. p. 177–82. Available from:
+https://ieeexplore.ieee.org/document/9431896/
+3.        Thakur P, Malhotra M, R M B. A Compendious Study on IoT-based Monitoring and
+Control System for Hydroponic System-Based Cultivation. Int J Eng Trends Technol. 2023
+Nov 30;71(12):11–22.
+1. Lampiran
+0.1. Surat Persetujuan/Pernyataan Masyarakat Sasar
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 9 of 11
+0.1. Gambaran Iptek Yang Ditransfer
+GAMBARAN IPTEK YANG DITRANSFER 
+Sistem Automatisasi Pompa air dalam rangka pengurangan volume air pada saat
+banjir di Desa Bojong Soang
+ Ketua Tim: Mia Rosmiati
+ 
+
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 10 of 11
+
+proposal_MIA_TBH_RIM.docx 15/10/26, 18.30
+https://docs.google.com/document/u/0/d/1SjQTkFT4RElHe1ar _q5USNrmcVdtegyi/mobilebasic 11 of 11
